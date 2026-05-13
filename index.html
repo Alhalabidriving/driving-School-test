@@ -167,7 +167,7 @@
 <a href="https://wa.me/96171863138">واتساب</a>
 </div>
 </nav>
-  <div class="exam-box" id="exam">
+  <div class="exam-box" id="exam" style="display:none;">
   <h2>الامتحان النظري</h2>
 
   <div id="question-box">
@@ -222,7 +222,13 @@ function showQuestion() {
     <button class="btn answer-btn">${q.answer3}</button>
   `;
 }
+function startExam(){
+  document.getElementById("exam").style.display = "block";
 
+  document.getElementById("exam").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 function nextQuestion(){
   currentQuestion++;
   showQuestion();
@@ -233,10 +239,11 @@ function nextQuestion(){
   <h1>🚗 مكتب الحلبي لتعليم القيادة</h1>
   <p>تعلّم القيادة بثقة — ودرّب نفسك على الامتحان النظري اللبناني</p>
 
-  <a class="btn" href="#exam">ابدأ الامتحان النظري</a>
+  <button class="btn" onclick="startExam()">
+  ابدأ الامتحان النظري
+</button>
   <a class="btn btn-dark" href="#services">خدماتنا</a>
 </header>
-
 <section id="services">
   <h2>خدماتنا</h2>
 
