@@ -85,6 +85,26 @@
   color: white;
   border: 1px solid rgba(255,255,255,0.3);
 }
+    .answer-btn {
+  display: block;
+  width: 80%;
+  margin: 12px auto;
+  padding: 15px;
+  border-radius: 18px;
+  border: 2px solid #0b2f5b;
+  background: white;
+  color: #0b2f5b;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.question-text {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 25px auto;
+  max-width: 800px;
+}
 
     section {
       padding: 40px 20px;
@@ -172,54 +192,119 @@
 <script>
 let questions = [];
 let currentQuestion = 0;
+let score = 0;
+let answered = false;
 
-fetch('questions.csv')
+function parseCSV(text) {
+  let rows = [];
+  let row = [];
+  let cell = "";
+  let insideQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    let char = text[i];
+
+    if (char === '"') {
+      insideQuotes = !insideQuotes;
+    } else if (char === "," && !insideQuotes) {
+      row.push(cell.trim());
+      cell = "";
+    } else if ((char === "\n" || char === "\r") && !insideQuotes) {
+      if (cell || row.length) {
+        row.push(cell.trim());
+        rows.push(row);
+        row = [];
+        cell = "";
+      }
+    } else {
+      cell += char;
+    }
+  }
+
+  if (cell || row.length) {
+    row.push(cell.trim());
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+fetch("questions.csv")
   .then(response => response.text())
   .then(data => {
-    const rows = data.split('\n').slice(1);
+    const rows = parseCSV(data);
+    const headers = rows[0];
 
-    questions = rows.map(row => {
-      const cols = row.split(',');
+    const qIndex = headers.findIndex(h => h.toLowerCase().includes("question"));
+    const a1Index = headers.findIndex(h => h.toLowerCase().includes("answer 1") || h.toLowerCase() === "answer1");
+    const a2Index = headers.findIndex(h => h.toLowerCase().includes("answer 2") || h.toLowerCase() === "answer2");
+    const a3Index = headers.findIndex(h => h.toLowerCase().includes("answer 3") || h.toLowerCase() === "answer3");
+    const cIndex = headers.findIndex(h => h.toLowerCase().includes("correct"));
 
-      return {
-        question: cols[0],
-        answer1: cols[1],
-        answer2: cols[2],
-        answer3: cols[3],
-        correct: cols[4]
-      };
-    });
+    questions = rows.slice(1).map(row => ({
+      question: row[qIndex],
+      answers: [row[a1Index], row[a2Index], row[a3Index]],
+      correct: Number(row[cIndex])
+    })).filter(q => q.question && q.answers[0]);
 
     showQuestion();
   });
 
 function showQuestion() {
-  if(currentQuestion >= questions.length){
-    document.getElementById("question-box").innerHTML =
-      "<h3>انتهى الامتحان 🎉</h3>";
+  answered = false;
+
+  if (currentQuestion >= questions.length) {
+    document.getElementById("question-box").innerHTML = `
+      <h3>انتهى الامتحان 🎉</h3>
+      <p>نتيجتك: ${score} / ${questions.length}</p>
+    `;
     return;
   }
 
   const q = questions[currentQuestion];
 
   document.getElementById("question-box").innerHTML = `
-    <h3>${q.question}</h3>
+    <h3>السؤال ${currentQuestion + 1}</h3>
+    <p class="question-text">${q.question}</p>
 
-    <button class="btn answer-btn">${q.answer1}</button><br><br>
-    <button class="btn answer-btn">${q.answer2}</button><br><br>
-    <button class="btn answer-btn">${q.answer3}</button>
+    <button class="answer-btn" onclick="checkAnswer(1, this)">${q.answers[0]}</button>
+    <button class="answer-btn" onclick="checkAnswer(2, this)">${q.answers[1]}</button>
+    <button class="answer-btn" onclick="checkAnswer(3, this)">${q.answers[2]}</button>
+
+    <p id="result"></p>
   `;
 }
-function startExam(){
-  document.getElementById("exam").style.display = "block";
 
-  document.getElementById("exam").scrollIntoView({
-    behavior: "smooth"
-  });
+function checkAnswer(choice, button) {
+  if (answered) return;
+  answered = true;
+
+  const correct = questions[currentQuestion].correct;
+  const result = document.getElementById("result");
+
+  if (choice === correct) {
+    button.style.background = "#2ecc71";
+    result.innerHTML = "✅ إجابة صحيحة";
+    result.style.color = "green";
+    score++;
+  } else {
+    button.style.background = "#e74c3c";
+    result.innerHTML = "❌ إجابة خاطئة";
+    result.style.color = "red";
+
+    const buttons = document.querySelectorAll(".answer-btn");
+    buttons[correct - 1].style.background = "#2ecc71";
+  }
 }
-function nextQuestion(){
+
+function nextQuestion() {
   currentQuestion++;
   showQuestion();
+}
+
+function startExam(){
+  document.getElementById("exam").style.display = "block";
+  document.getElementById("exam").scrollIntoView({ behavior: "smooth" });
 }
 </script>
 <header>
