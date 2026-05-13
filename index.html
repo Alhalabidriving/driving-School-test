@@ -166,8 +166,68 @@
 <a href="#exam">الامتحان</a>
 <a href="https://wa.me/96171863138">واتساب</a>
 </div>
-
 </nav>
+  <div class="exam-box" id="exam">
+  <h2>الامتحان النظري</h2>
+
+  <div id="question-box">
+    جاري تحميل الأسئلة...
+  </div>
+
+  <br>
+
+  <button class="btn" onclick="nextQuestion()">
+    السؤال التالي
+  </button>
+</div>
+
+<script>
+let questions = [];
+let currentQuestion = 0;
+
+fetch('questions.csv')
+  .then(response => response.text())
+  .then(data => {
+    const rows = data.split('\n').slice(1);
+
+    questions = rows.map(row => {
+      const cols = row.split(',');
+
+      return {
+        question: cols[0],
+        answer1: cols[1],
+        answer2: cols[2],
+        answer3: cols[3],
+        correct: cols[4]
+      };
+    });
+
+    showQuestion();
+  });
+
+function showQuestion() {
+  if(currentQuestion >= questions.length){
+    document.getElementById("question-box").innerHTML =
+      "<h3>انتهى الامتحان 🎉</h3>";
+    return;
+  }
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("question-box").innerHTML = `
+    <h3>${q.question}</h3>
+
+    <button class="btn answer-btn">${q.answer1}</button><br><br>
+    <button class="btn answer-btn">${q.answer2}</button><br><br>
+    <button class="btn answer-btn">${q.answer3}</button>
+  `;
+}
+
+function nextQuestion(){
+  currentQuestion++;
+  showQuestion();
+}
+</script>
 <header>
   <img src="halabii.png" width="140">
   <h1>🚗 مكتب الحلبي لتعليم القيادة</h1>
