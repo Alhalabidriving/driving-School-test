@@ -1,68 +1,187 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مكتب الحلبي لتعليم القيادة</title>
 
   <style>
-
-    body{
-      font-family: Arial;
-      background:#f5f5f5;
-      text-align:center;
-      direction:rtl;
-      margin:0;
-      padding:0;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #1b1b1b;
     }
 
-    .container{
-      padding:50px;
+    header {
+      background: linear-gradient(135deg, #0b2f5b, #1f6fb2);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
     }
 
-    h1{
-      color:#1e3a5f;
-      font-size:40px;
+    header h1 {
+      font-size: 38px;
+      margin: 10px 0;
     }
 
-    p{
-      font-size:20px;
-      color:#444;
+    header p {
+      font-size: 20px;
+      margin: 10px 0 25px;
     }
 
-    .btn{
-      display:inline-block;
-      margin-top:20px;
-      padding:15px 30px;
-      background:#1e3a5f;
-      color:white;
-      text-decoration:none;
-      border-radius:10px;
-      font-size:20px;
+    .btn {
+      display: inline-block;
+      background: #ffc107;
+      color: #0b2f5b;
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 8px;
     }
 
-    .btn:hover{
-      background:#2d5d90;
+    .btn-dark {
+      background: white;
+      color: #0b2f5b;
     }
 
+    section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0b2f5b;
+      font-size: 30px;
+      margin-bottom: 25px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-top: 5px solid #ffc107;
+    }
+
+    .card h3 {
+      color: #0b2f5b;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .exam-box {
+      background: white;
+      border-radius: 22px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    footer {
+      background: #0b2f5b;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
   </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+  <h1>🚗 مكتب الحلبي لتعليم القيادة</h1>
+  <p>تعلّم القيادة بثقة — ودرّب نفسك على الامتحان النظري اللبناني</p>
 
-<h1>🚗 مكتب الحلبي لتعليم القيادة</h1>
+  <a class="btn" href="#exam">ابدأ الامتحان النظري</a>
+  <a class="btn btn-dark" href="#services">خدماتنا</a>
+</header>
 
-<p>
-اختبر معلوماتك بالنظري اللبناني
-</p>
+<section id="services">
+  <h2>خدماتنا</h2>
 
-<a class="btn" href="#">
-ابدأ الامتحان
-</a>
+  <div class="cards">
+    <div class="card">
+      <h3>🚘 تعليم قيادة</h3>
+      <p>حصص تدريب للمبتدئين وتقوية المهارات على الطريق العام.</p>
+    </div>
 
-</div>
+    <div class="card">
+      <h3>📝 امتحان نظري</h3>
+      <p>تدريب على أسئلة النظري والإشارات بطريقة سهلة وواضحة.</p>
+    </div>
+
+    <div class="card">
+      <h3>🪪 معاملات رخص</h3>
+      <p>تجديد رخصة، رخصة جديدة، رخصة دولية ومعاملات السيارات.</p>
+    </div>
+
+    <div class="card">
+      <h3>📍 طرابلس وبيروت</h3>
+      <p>تدريب منظم حسب المنطقة والمواعيد المتاحة.</p>
+    </div>
+  </div>
+</section>
+
+<section id="exam">
+  <h2>اختبر معلوماتك</h2>
+
+  <div class="exam-box">
+    <h3>امتحان نظري تجريبي</h3>
+    <p>قريباً رح نضيف أسئلة حقيقية مع نتيجة مباشرة للطالب.</p>
+
+    <a class="btn" href="#">ابدأ قريباً</a>
+    <a class="btn whatsapp" href="https://wa.me/96171863138">احجز عبر واتساب</a>
+  </div>
+</section>
+
+<section>
+  <h2>ليش تختار مكتب الحلبي؟</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>✅ شرح واضح</h3>
+      <p>تعليم خطوة بخطوة بدون توتر.</p>
+    </div>
+
+    <div class="card">
+      <h3>✅ تدريب عملي</h3>
+      <p>مناورات، طريق عام، وتهيئة للامتحان.</p>
+    </div>
+
+    <div class="card">
+      <h3>✅ متابعة للطالب</h3>
+      <p>نساعدك تعرف نقاط ضعفك وتقوّيها قبل الامتحان.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© مكتب الحلبي لتعليم القيادة</p>
+  <p>للحجز والاستفسار: 71863138</p>
+</footer>
 
 </body>
 </html>
