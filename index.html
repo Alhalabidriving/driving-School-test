@@ -36,21 +36,26 @@
     }
 
     .btn {
-      display: inline-block;
-      background: #ffc107;
-      color: #0b2f5b;
-      padding: 14px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      margin: 8px;
-    }
+  display: inline-block;
+  padding: 16px 34px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px;
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+    .btn:hover {
+  transform: translateY(-4px) scale(1.03);
+}
 
     .btn-dark {
-      background: white;
-      color: #0b2f5b;
-    }
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+}
 
     section {
       padding: 40px 20px;
