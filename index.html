@@ -12,6 +12,30 @@
       background: #f4f7fb;
       color: #1b1b1b;
     }
+    .navbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(12px);
+  z-index: 999;
+}
+
+.nav-links a{
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover{
+  color: #ffd43b;
+}
 
   header {
   background:
@@ -23,6 +47,7 @@
   color: white;
   padding: 90px 20px;
   text-align: center;
+    padding-top: 140px;
 }
 
     header h1 {
@@ -126,7 +151,20 @@
 </head>
 
 <body>
+<nav class="navbar">
 
+<div class="nav-logo">
+<img src="halabi1.png" width="60">
+</div>
+
+<div class="nav-links">
+<a href="#">الرئيسية</a>
+<a href="#services">الخدمات</a>
+<a href="#exam">الامتحان</a>
+<a href="https://wa.me/96171863138">واتساب</a>
+</div>
+
+</nav>
 <header>
   <img src="halabii.png" width="140">
   <h1>🚗 مكتب الحلبي لتعليم القيادة</h1>
